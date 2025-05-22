@@ -13,11 +13,9 @@
 
 ### 방법 1: npx 사용 (추천) ⚡
 
-npm 패키지로 배포된 경우, 별도 설치 없이 바로 사용:
-
 ```bash
 # 계정 설정 도우미
-npx @your-username/lotto-mcp-server --setup
+npx @labforadvanced.study/lotto-mcp-server --setup
 
 # 또는 직접 인코딩
 echo "your_id,your_password" | base64
@@ -29,7 +27,7 @@ echo "your_id,your_password" | base64
   "mcpServers": {
     "lotto": {
       "command": "npx",
-      "args": ["@your-username/lotto-mcp-server"],
+      "args": ["@labforadvanced.study/lotto-mcp-server"],
       "env": {
         "LOTTO_CREDENTIALS": "your_base64_credentials"
       }
