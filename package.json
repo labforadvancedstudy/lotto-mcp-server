@@ -1,0 +1,68 @@
+{
+    "name": "@labforadvanced.study/lotto-mcp-server",
+    "version": "0.0.8",
+    "description": "MCP Server for automated lotto purchase and checking with npx support",
+    "main": "dist/index.js",
+    "type": "module",
+    "bin": {
+        "lotto-mcp-server": "bin/lotto-mcp.js"
+    },
+    "files": [
+        "dist/**/*",
+        "bin/**/*",
+        "README.md",
+        "package.json"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "start": "node dist/index.js",
+        "dev": "tsx src/index.ts",
+        "install-playwright": "playwright install chromium",
+        "encrypt-credentials": "tsx src/encrypt-credentials.ts",
+        "simple-encode": "chmod +x scripts/simple-encode.sh && ./scripts/simple-encode.sh",
+        "docker:build": "docker build -t lotto-mcp-server:latest .",
+        "docker:deploy": "chmod +x scripts/deploy-docker.sh && ./scripts/deploy-docker.sh",
+        "docker:test": "chmod +x scripts/test-docker.sh && ./scripts/test-docker.sh",
+        "npm:test": "chmod +x scripts/test-local.sh && ./scripts/test-local.sh",
+        "npm:publish": "chmod +x scripts/npm-publish-guide.sh && ./scripts/npm-publish-guide.sh",
+        "test:mcp": "node test-mcp.js",
+        "test:simple": "chmod +x scripts/simple-test.sh && ./scripts/simple-test.sh",
+        "prepublishOnly": "npm run build",
+        "postinstall": "npm run install-playwright"
+    },
+    "keywords": [
+        "mcp",
+        "lotto",
+        "automation",
+        "playwright",
+        "npx",
+        "cli"
+    ],
+    "author": "Your Name <your.email@example.com>",
+    "license": "MIT",
+    "homepage": "https://github.com/your-username/lotto-mcp-server#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/your-username/lotto-mcp-server.git"
+    },
+    "bugs": {
+        "url": "https://github.com/your-username/lotto-mcp-server/issues"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^0.6.0",
+        "@rich-automation/lotto": "^1.0.0",
+        "playwright": "^1.40.0",
+        "zod": "^3.22.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "tsx": "^4.0.0",
+        "typescript": "^5.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}

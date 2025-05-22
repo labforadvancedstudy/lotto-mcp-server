@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  lotto-mcp-server:
+    build: .
+    # 또는 Docker Hub에서 이미지 가져오기:
+    # image: lotto-mcp-server:latest
+    container_name: lotto-mcp-server
+    restart: unless-stopped
+    environment:
+      # 간단 모드 (Base64) - 둘 중 하나만 사용
+      - LOTTO_CREDENTIALS=${LOTTO_CREDENTIALS}
+      
+      # 고급 모드 (AES 암호화) - 둘 중 하나만 사용
+      - LOTTO_ENCRYPTED_ID=${LOTTO_ENCRYPTED_ID}
+      - LOTTO_ENCRYPTED_PASSWORD=${LOTTO_ENCRYPTED_PASSWORD}
+      - LOTTO_SECRET_KEY=${LOTTO_SECRET_KEY}
+      
+      # 로그 레벨 (선택사항)
+      - LOG_LEVEL=2
+    stdin_open: true
+    tty: true
+    # MCP는 stdio를 사용하므로 포트 매핑 불필요
+    # ports:
+    #   - "3000:3000"
+    
+    # 볼륨 마운트 (로그나 데이터 저장이 필요한 경우)
+    volumes:
+      - ./logs:/app/logs
+    
+    # 메모리 제한 (선택사항)
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    
+    # 보안 설정
+    security_opt:
+      - no-new-privileges:true
+    
+    # 네트워크 설정 (필요시)
+    networks:
+      - lotto-network
+
+networks:
+  lotto-network:
+    driver: bridge
